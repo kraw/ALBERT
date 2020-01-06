@@ -89,7 +89,7 @@ TF-Hub modules are available:
 - Xlarge: [[Tar file](https://storage.googleapis.com/albert_models/albert_xlarge_v1.tar.gz)] [[TF-Hub](https://tfhub.dev/google/albert_xlarge/1)]
 - Xxlarge: [[Tar file](https://storage.googleapis.com/albert_models/albert_xxlarge_v1.tar.gz)] [[TF-Hub](https://tfhub.dev/google/albert_xxlarge/1)]
 
-Example usage of the TF-Hub module:
+Example usage of the TF-Hub module in code:
 
 ```
 tags = set()
@@ -111,7 +111,8 @@ albert_outputs = albert_module(
 output_layer = albert_outputs["pooled_output"]
 ```
 
-For a full example, see `run_classifier_with_tfhub.py`.
+Most of the fine-tuning scripts in this repository support TF-hub modules
+via the `--albert_hub_module_handle` flag.
 
 Pre-training Instructions
 =========================
@@ -169,9 +170,10 @@ python -m albert.run_classifier \
 ```
 
 Good default flag values for each GLUE task can be found in `run_glue.sh`.
+
 You can fine-tune the model starting from TF-Hub modules instead of raw
 checkpoints by setting e.g.
-`--albert_hub_module_handle==https://tfhub.dev/google/albert_base/1` instead
+`--albert_hub_module_handle=https://tfhub.dev/google/albert_base/1` instead
 of `--init_checkpoint`.
 
 After evaluation, the script should report some output like this:
@@ -219,6 +221,11 @@ python -m albert.run_squad_v1 \
   --max_answer_length=30
 ```
 
+You can fine-tune the model starting from TF-Hub modules instead of raw
+checkpoints by setting e.g.
+`--albert_hub_module_handle=https://tfhub.dev/google/albert_base/1` instead
+of `--init_checkpoint`.
+
 For SQuAD v2, use the `run_squad_v2.py` script:
 
 ```
@@ -249,6 +256,13 @@ python -m albert.run_squad_v2 \
   --max_answer_length=30
 ```
 
+You can fine-tune the model starting from TF-Hub modules instead of raw
+checkpoints by setting e.g.
+`--albert_hub_module_handle=https://tfhub.dev/google/albert_base/1` instead
+of `--init_checkpoint`.
+
+Fine-tuning on RACE
+===================
 For RACE, use the `run_race.py` script:
 
 ```
@@ -272,3 +286,8 @@ python -m albert.run_race \
   --warmup_step=1000 \
   --save_checkpoints_steps=100
 ```
+
+You can fine-tune the model starting from TF-Hub modules instead of raw
+checkpoints by setting e.g.
+`--albert_hub_module_handle=https://tfhub.dev/google/albert_base/1` instead
+of `--init_checkpoint`.
